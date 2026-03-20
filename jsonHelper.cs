@@ -86,10 +86,10 @@ internal class JsonHelper
         }
     }
 
-    public T LoadFile<T>(out T a, string fileName)
+    public T LoadFile<T>(out T newVariable, string fileName)
     {
             string jsonString = File.ReadAllText($@"{projectDir}\{fileName}.json");
-            a = JsonSerializer.Deserialize<T>(jsonString);
-            return a;
+            newVariable = JsonSerializer.Deserialize<T>(jsonString);
+            return newVariable;
     }
 }

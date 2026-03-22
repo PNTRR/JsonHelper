@@ -14,7 +14,7 @@
 ## 📋 Version History
 | Version | Date | Changes |
 |--------|------|-----------|
-| 1.0.0 | 2025-03-20 | ✨ First release. Basic methods: create, delete, save, and load JSON files. |
+| 1.0.0 | 2026-03-20 | ✨ First release. Basic methods: create, delete, save, and load JSON files. |
 
 ## 🛠️ How to add to your project
 1. **Copy the file** `JsonHelper.cs` to your project folder.

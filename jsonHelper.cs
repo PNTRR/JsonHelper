@@ -1,19 +1,22 @@
-using System.IO;
 using System.Text.Json;
 
 internal class JsonHelper
 {
-    static private string currentDir = Environment.CurrentDirectory;
-    static private string projectDir = Path.GetFullPath(Path.Combine(currentDir, "../../.."));
+    static private string ProjectDir = null;
+
+    public void SetRootPath(string projectDir)
+    {
+        ProjectDir = projectDir;
+    }
 
     public void CreateFile(string fileName)
     {
-            using (File.Create($@"{projectDir}\{fileName}.json")) { }
+        using (File.Create($@"{ProjectDir}\{fileName}.json")) { }
     }
 
     public void CreateFile(string filePath, string fileName)
     {
-            using (File.Create($@"{filePath}\{fileName}.json")) { }
+        using (File.Create($@"{filePath}\{fileName}.json")) { }
     }
 
     public void CreateFile(string[] fileName)
@@ -34,7 +37,7 @@ internal class JsonHelper
 
     public void DeleteFile(string fileName)
     {
-        File.Delete($@"{projectDir}\{fileName}.json");
+        File.Delete($@"{ProjectDir}\{fileName}.json");
     }
 
     public void DeleteFile(string filePath, string fileName)
@@ -61,7 +64,7 @@ internal class JsonHelper
     public void SaveFile(string fileName, object data)
     {
         string jsonString = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText($@"{projectDir}\{fileName}.json", jsonString);
+        File.WriteAllText($@"{ProjectDir}\{fileName}.json", jsonString);
     }
 
     public void SaveFile(string filePath, string fileName, object data)
@@ -88,8 +91,15 @@ internal class JsonHelper
 
     public T LoadFile<T>(out T newVariable, string fileName)
     {
-            string jsonString = File.ReadAllText($@"{projectDir}\{fileName}.json");
+            string jsonString = File.ReadAllText($@"{ProjectDir}\{fileName}.json");
             newVariable = JsonSerializer.Deserialize<T>(jsonString);
             return newVariable;
+    }
+
+    public T LoadFile<T>(out T newVariable, string filePath, string fileName)
+    {
+        string jsonString = File.ReadAllText($@"{filePath}\{fileName}.json");
+        newVariable = JsonSerializer.Deserialize<T>(jsonString);
+        return newVariable;
     }
 }

@@ -9,6 +9,11 @@ internal class JsonHelper
         ProjectDir = projectDir;
     }
 
+    public void ResetRootPath()
+    {
+        ProjectDir = null;
+    }
+
     public void CreateFile(string fileName)
     {
         using (File.Create($@"{ProjectDir}\{fileName}.json")) { }
